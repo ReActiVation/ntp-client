@@ -4,17 +4,12 @@
 #include <string.h>
 #include <time.h>
 #include <sys/types.h>
-#include <stdint.h>
-
-#ifdef __WIN32__
-#include <winsock2.h>
-#else
 #include <sys/socket.h>
 #include <netinet/in.h>
 #include <netdb.h>
-#endif
 
 #define NTP_TIMESTAMP_DELTA 2208988800ull
+#define h_addr h_addr_list[0] /* hostent backward compatibility */
 
 #define LI(packet) (uint8_t) ((packet.li_vn_mode & 0xC0) >> 6) // (li   & 11 000 000) >> 6
 #define VN(packet) (uint8_t) ((packet.li_vn_mode & 0x38) >> 3) // (vn   & 00 111 000) >> 3
@@ -77,7 +72,7 @@ int main(int argc, char* argv[ ])
     //connect to the server, send the packet, and then read the return packet.
 
     struct sockaddr_in server_address; //Server address data structure.
-    struct hostnet *server; //Server data structure.
+    struct hostent *server; //Server data structure.
 
     socket_file_descriptor = socket(AF_INET, SOCK_DGRAM, IPPROTO_UDP); //Create UDP socket.
 
