@@ -1,1 +1,2 @@
-# ntp-client
+# NTP Client
+Simple Ntp Client app
