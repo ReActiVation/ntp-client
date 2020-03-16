@@ -1,12 +1,19 @@
 #include <unistd.h>
+#include <string.h>
+#include <stdint.h>
 #include <stdio.h>
 #include <stdlib.h>
-#include <string.h>
+#ifdef _WIN32
+#include <winsock2.h>
+#include <windows.h>
+#else
 #include <time.h>
 #include <sys/types.h>
 #include <sys/socket.h>
 #include <netinet/in.h>
 #include <netdb.h>
+#endif
+
 
 #define NTP_TIMESTAMP_DELTA 2208988800ull
 #define h_addr h_addr_list[0] /* hostent backward compatibility */
